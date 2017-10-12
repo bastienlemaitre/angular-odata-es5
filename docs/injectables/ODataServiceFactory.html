@@ -134,6 +134,22 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                </li>
+                        </ul>
+                    </li>
             
             
             
@@ -269,6 +285,22 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                       </li>
+                               </ul>
+                           </li>
                    
                    
                    
@@ -388,10 +420,10 @@
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { ODataService } from &#x27;./angularODataService&#x27;;
-import { ODataConfiguration } from &#x27;./angularODataConfiguration&#x27;;
+        <pre><code class="hljs javascript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+
+import { ODataConfiguration, ODataService } from &#x27;./index&#x27;;
 
 @Injectable()
 export class ODataServiceFactory {

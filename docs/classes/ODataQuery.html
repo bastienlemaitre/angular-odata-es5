@@ -134,6 +134,22 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                </li>
+                        </ul>
+                    </li>
             
             
             
@@ -269,6 +285,22 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                       </li>
+                               </ul>
+                           </li>
                    
                    
                    
@@ -499,12 +531,11 @@
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import { Observable, Operator, Subject } from &#x27;rxjs/Rx&#x27;;
+        <pre><code class="hljs javascript">import { Observable } from &#x27;rxjs/Rx&#x27;;
 
-import { ODataConfiguration } from &#x27;./angularODataConfiguration&#x27;;
-import { ODataOperation } from &#x27;./angularODataOperation&#x27;;
-import { ODataPagedResult } from &#x27;./angularODataPagedResult&#x27;;
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from &#x27;@angular/common/http&#x27;;
+
+import { IODataResponseModel, ODataConfiguration, ODataOperation, ODataPagedResult  } from &#x27;./index&#x27;;
 
 export class ODataQuery&lt;T&gt; extends ODataOperation&lt;T&gt; {
     private _filter: string;
@@ -539,7 +570,7 @@ export class ODataQuery&lt;T&gt; extends ODataOperation&lt;T&gt; {
         return this;
     }
 
-    public Exec(): Observable&lt;Array&lt;T&gt;&gt; {
+    public Exec(): Observable&lt;T[]&gt; {
         const requestOptions: {
             headers?: HttpHeaders;
             observe: &#x27;response&#x27;;
@@ -549,7 +580,7 @@ export class ODataQuery&lt;T&gt; extends ODataOperation&lt;T&gt; {
             withCredentials?: boolean;
         } &#x3D; this.getQueryRequestOptions(false);
 
-        return this.http.get&lt;T&gt;(this._entitiesUri, requestOptions)
+        return this.http.get&lt;IODataResponseModel&lt;T&gt;&gt;(this._entitiesUri, requestOptions)
             .map(res &#x3D;&gt; this.extractArrayData(res, this.config))
             .catch((err: any, caught: Observable&lt;Array&lt;T&gt;&gt;) &#x3D;&gt; {
                 if (this.config.handleError) {
@@ -569,7 +600,7 @@ export class ODataQuery&lt;T&gt; extends ODataOperation&lt;T&gt; {
             withCredentials?: boolean;
         } &#x3D; this.getQueryRequestOptions(true);
 
-        return this.http.get&lt;T&gt;(this._entitiesUri, requestOptions)
+        return this.http.get&lt;IODataResponseModel&lt;T&gt;&gt;(this._entitiesUri, requestOptions)
             .map(res &#x3D;&gt; this.extractArrayDataWithCount(res, this.config))
             .catch((err: any, caught: Observable&lt;ODataPagedResult&lt;T&gt;&gt;) &#x3D;&gt; {
                 if (this.config.handleError) {
@@ -615,12 +646,12 @@ export class ODataQuery&lt;T&gt; extends ODataOperation&lt;T&gt; {
         return options;
     }
 
-    private extractArrayData(res: HttpResponse&lt;T&gt;, config: ODataConfiguration): Array&lt;T&gt; {
-        return config.extractQueryResultData&lt;T&gt;(res);
+    private extractArrayData(res: HttpResponse&lt;IODataResponseModel&lt;T&gt;&gt;, config: ODataConfiguration): T[] {
+        return config.extractQueryResultData(res);
     }
 
-    private extractArrayDataWithCount(res: HttpResponse&lt;T&gt;, config: ODataConfiguration): ODataPagedResult&lt;T&gt; {
-        return config.extractQueryResultDataWithCount&lt;T&gt;(res);
+    private extractArrayDataWithCount(res: HttpResponse&lt;IODataResponseModel&lt;T&gt;&gt;, config: ODataConfiguration): ODataPagedResult&lt;T&gt; {
+        return config.extractQueryResultDataWithCount(res);
     }
 }
 </code></pre>

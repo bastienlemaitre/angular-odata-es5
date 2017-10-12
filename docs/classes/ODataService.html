@@ -134,6 +134,22 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                </li>
+                        </ul>
+                    </li>
             
             
             
@@ -269,6 +285,22 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                       </li>
+                               </ul>
+                           </li>
                    
                    
                    
@@ -625,13 +657,13 @@
             </section>
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import * as S from &#x27;string&#x27;;
-import { Observable, Operator } from &#x27;rxjs/Rx&#x27;;
-import { ODataConfiguration } from &#x27;./angularODataConfiguration&#x27;;
-import { ODataQuery } from &#x27;./angularODataQuery&#x27;;
+        <pre><code class="hljs javascript">import { Observable } from &#x27;rxjs/Rx&#x27;;
+
+import { HttpClient, HttpResponse } from &#x27;@angular/common/http&#x27;;
+
 import { GetOperation } from &#x27;./angularODataOperation&#x27;;
 import { ODataUtils } from &#x27;./angularODataUtils&#x27;;
-import { HttpClient, HttpResponse } from &#x27;@angular/common/http&#x27;;
+import { ODataConfiguration, ODataQuery } from &#x27;./index&#x27;;
 
 export class ODataService&lt;T&gt; {
     private _entitiesUri: string;
@@ -710,10 +742,6 @@ export class ODataService&lt;T&gt; {
         const entity: T &#x3D; body;
 
         return entity || null;
-    }
-
-    private escapeKey() {
-
     }
 }
 </code></pre>

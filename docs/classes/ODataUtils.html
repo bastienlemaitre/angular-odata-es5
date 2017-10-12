@@ -134,6 +134,22 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                </li>
+                        </ul>
+                    </li>
             
             
             
@@ -269,6 +285,22 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/IODataResponseModel.html" >IODataResponseModel</a>
+                                       </li>
+                               </ul>
+                           </li>
                    
                    
                    
@@ -378,11 +410,7 @@
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import { forEach } from &#x27;@angular/router/src/utils/collection&#x27;;
-import * as util from &#x27;util&#x27;;
-import * as S from &#x27;string&#x27;;
-
-export class ODataUtils {
+        <pre><code class="hljs javascript">export class ODataUtils {
     public static convertObjectToString(obj: any): string {
         const properties: string[] &#x3D; [];
 
