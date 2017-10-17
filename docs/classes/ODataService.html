@@ -738,7 +738,7 @@ export class ODataService&lt;T&gt; {
             throw new Error(&#x27;Bad response status: &#x27; + res.status);
         }
 
-        const body: any &#x3D; res;
+        const body: any &#x3D; res.body;
         const entity: T &#x3D; body;
 
         return entity || null;
