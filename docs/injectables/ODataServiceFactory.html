@@ -375,34 +375,7 @@
                                         <span class="modifier-icon method fa fa-play circle">
                                             <span class="fa fa-circle"></span>
                                         </span>
-                                    <code>CreateService(typeName: string, handleError: (err: any) => any)</code>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <div class="io-description">
-                                            <b>Returns: </b>    <code><a href="../classes/ODataService.html" target="_self" >ODataService&lt;T&gt;</a></code>
-            
-                                        </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <b><span class="modifier">Public</span> CreateServiceWithOptions</b>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <span class="modifier-icon method fa fa-play circle">
-                                            <span class="fa fa-circle"></span>
-                                        </span>
-                                    <code>CreateServiceWithOptions(typeName: string, config: <a href="../injectables/ODataConfiguration.html" >ODataConfiguration</a>)</code>
+                                    <code>CreateService(typeName: string, config: <a href="../injectables/ODataConfiguration.html" >ODataConfiguration</a>)</code>
                                 </td>
                             </tr>
             
@@ -431,12 +404,8 @@ export class ODataServiceFactory {
     constructor(private http: HttpClient, private config: ODataConfiguration) {
     }
 
-    public CreateService&lt;T&gt;(typeName: string, handleError?: (err: any) &#x3D;&gt; any): ODataService&lt;T&gt; {
-        return new ODataService&lt;T&gt;(typeName, this.http, this.config);
-    }
-
-    public CreateServiceWithOptions&lt;T&gt;(typeName: string, config: ODataConfiguration): ODataService&lt;T&gt; {
-        return new ODataService&lt;T&gt;(typeName, this.http, config);
+    public CreateService&lt;T&gt;(typeName: string, config?: ODataConfiguration): ODataService&lt;T&gt; {
+        return new ODataService&lt;T&gt;(typeName, this.http, config !&#x3D; null ? config : this.config);
     }
 }
 </code></pre>
