@@ -52,7 +52,7 @@ export class ODataConfiguration {
         return this.baseUrl + '/' + this.sanitizeTypeName(typeName);
     }
 
-    public getEntityUri(entityKey: string, typeName: string): string {
+    public getEntityUri(entityKey: string | number | boolean, typeName: string): string {
         return this.getEntitiesUri(typeName) + `(${ODataUtils.quoteValue(entityKey)})`;
     }
 
@@ -65,9 +65,7 @@ export class ODataConfiguration {
             throw new Error('Bad response status: ' + res.status);
         }
 
-        const body: any = res.body;
-        const entities: T[] = body.value;
-        return entities;
+        return res.body.value;
     }
 
     public extractQueryResultDataWithCount<T>(res: HttpResponse<IODataResponseModel<T>>): ODataPagedResult<T> {

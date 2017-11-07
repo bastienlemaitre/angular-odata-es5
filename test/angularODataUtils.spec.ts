@@ -11,9 +11,25 @@ describe('ODataUtils', () => {
         assert.equal(value, `'test'`);
     });
 
+    it('quoteValue string with quotes', () => {
+        // Act
+        const value: string = ODataUtils.quoteValue('te\'st');
+
+        // Assert
+        assert.equal(value, `'te\'\'st'`);
+    });
+
+    it('quoteValue boolean', () => {
+        // Act
+        const value: string = ODataUtils.quoteValue(true);
+
+        // Assert
+        assert.equal(value, `true`);
+    });
+
     it('quoteValue integer', () => {
         // Act
-        const value: string = ODataUtils.quoteValue('10');
+        const value: string = ODataUtils.quoteValue(10);
 
         // Assert
         assert.equal(value, '10');
@@ -21,7 +37,7 @@ describe('ODataUtils', () => {
 
     it('quoteValue double', () => {
         // Act
-        const value: string = ODataUtils.quoteValue('-10.01');
+        const value: string = ODataUtils.quoteValue(-10.01);
 
         // Assert
         assert.equal(value, '-10.01');
@@ -37,7 +53,8 @@ describe('ODataUtils', () => {
 
     it('convertObjectToString', () => {
         // Act
-        const value: string = ODataUtils.convertObjectToString({ str: 'abc', int: 10, double: -10.01, guid: 'eefea99a-c988-44b8-ac37-b326a489c1e3' });
+        const value: string = ODataUtils.convertObjectToString(
+          { str: 'abc', int: 10, double: -10.01, guid: 'eefea99a-c988-44b8-ac37-b326a489c1e3', omitted: undefined });
 
         // Assert
         assert.equal(value, `str='abc', int=10, double=-10.01, guid=eefea99a-c988-44b8-ac37-b326a489c1e3`);
