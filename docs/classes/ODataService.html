@@ -377,7 +377,7 @@
                                         <span class="modifier-icon method fa fa-play circle">
                                             <span class="fa fa-circle"></span>
                                         </span>
-                                    <code>Get(key: string)</code>
+                                    <code>Get(key: string | number | boolean)</code>
                                 </td>
                             </tr>
             
@@ -422,6 +422,87 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
+                                    <b><span class="modifier">Public</span> Patch</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play circle">
+                                            <span class="fa fa-circle"></span>
+                                        </span>
+                                    <code>Patch(entity: any, key: string | number | boolean)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>Observable&lt;HttpResponse&lt;T&gt;&gt;</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Public</span> Put</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play circle">
+                                            <span class="fa fa-circle"></span>
+                                        </span>
+                                    <code>Put(entity: T, key: string | number | boolean)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>Observable&lt;T&gt;</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Public</span> Delete</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play circle">
+                                            <span class="fa fa-circle"></span>
+                                        </span>
+                                    <code>Delete(key: string | number | boolean)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>Observable&lt;HttpResponse&lt;T&gt;&gt;</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
                                     <b><span class="modifier">Public</span> CustomAction</b>
                                 </td>
                             </tr>
@@ -431,7 +512,7 @@
                                         <span class="modifier-icon method fa fa-play circle">
                                             <span class="fa fa-circle"></span>
                                         </span>
-                                    <code>CustomAction(key: string, actionName: string, postdata: any)</code>
+                                    <code>CustomAction(key: string | number | boolean, actionName: string, postdata: any)</code>
                                 </td>
                             </tr>
             
@@ -466,87 +547,6 @@
                                 <td class="col-md-4">
                                         <div class="io-description">
                                             <b>Returns: </b>    <code>Observable&lt;any&gt;</code>
-            
-                                        </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <b><span class="modifier">Public</span> Patch</b>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <span class="modifier-icon method fa fa-play circle">
-                                            <span class="fa fa-circle"></span>
-                                        </span>
-                                    <code>Patch(entity: any, key: string)</code>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <div class="io-description">
-                                            <b>Returns: </b>    <code>Observable&lt;HttpResponse&lt;T&gt;&gt;</code>
-            
-                                        </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <b><span class="modifier">Public</span> Put</b>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <span class="modifier-icon method fa fa-play circle">
-                                            <span class="fa fa-circle"></span>
-                                        </span>
-                                    <code>Put(entity: T, key: string)</code>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <div class="io-description">
-                                            <b>Returns: </b>    <code>Observable&lt;T&gt;</code>
-            
-                                        </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <b><span class="modifier">Public</span> Delete</b>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <span class="modifier-icon method fa fa-play circle">
-                                            <span class="fa fa-circle"></span>
-                                        </span>
-                                    <code>Delete(key: string)</code>
-                                </td>
-                            </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                        <div class="io-description">
-                                            <b>Returns: </b>    <code>Observable&lt;HttpResponse&lt;T&gt;&gt;</code>
             
                                         </div>
                                 </td>
@@ -593,7 +593,7 @@
                                         <span class="modifier-icon method fa fa-play lock">
                                             <span class="fa fa-lock"></span>
                                         </span>
-                                    <code>getEntityUri(entityKey: string)</code>
+                                    <code>getEntityUri(entityKey: string | number | boolean)</code>
                                 </td>
                             </tr>
             
@@ -676,17 +676,31 @@ export class ODataService&lt;T&gt; {
         return this._typeName;
     }
 
-    public Get(key: string): GetOperation&lt;T&gt; {
+    public Get(key: string | number | boolean): GetOperation&lt;T&gt; {
         return new GetOperation&lt;T&gt;(this._typeName, this.config, this._http, key);
     }
 
     public Post(entity: T): Observable&lt;T&gt; {
-        const body &#x3D; JSON.stringify(entity);
+        const body &#x3D; entity ? JSON.stringify(entity) : null;
         return this.handleResponse(this._http.post&lt;T&gt;(this._entitiesUri, body, this.config.postRequestOptions));
     }
 
-    public CustomAction(key: string, actionName: string, postdata: any): Observable&lt;any&gt; {
-        const body &#x3D; JSON.stringify(postdata);
+    public Patch(entity: any, key: string | number | boolean): Observable&lt;HttpResponse&lt;T&gt;&gt; {
+        const body &#x3D; entity ? JSON.stringify(entity) : null;
+        return this._http.patch&lt;T&gt;(this.getEntityUri(key), body, this.config.postRequestOptions);
+    }
+
+    public Put(entity: T, key: string | number | boolean): Observable&lt;T&gt; {
+        const body &#x3D; entity ? JSON.stringify(entity) : null;
+        return this.handleResponse(this._http.put&lt;T&gt;(this.getEntityUri(key), body, this.config.postRequestOptions));
+    }
+
+    public Delete(key: string | number | boolean): Observable&lt;HttpResponse&lt;T&gt;&gt; {
+        return this._http.delete&lt;T&gt;(this.getEntityUri(key), this.config.defaultRequestOptions);
+    }
+
+    public CustomAction(key: string | number | boolean, actionName: string, postdata: any): Observable&lt;any&gt; {
+        const body &#x3D; postdata ? JSON.stringify(postdata) : null;
         return this._http.post(this.getEntityUri(key) + &#x27;/&#x27; + actionName, body, this.config.defaultRequestOptions).map(resp &#x3D;&gt; resp);
     }
 
@@ -701,25 +715,11 @@ export class ODataService&lt;T&gt; {
         return this._http.get(&#x60;${this._entitiesUri}/${functionName}&#x60;, this.config.defaultRequestOptions).map(resp &#x3D;&gt; resp);
     }
 
-    public Patch(entity: any, key: string): Observable&lt;HttpResponse&lt;T&gt;&gt; {
-        const body &#x3D; JSON.stringify(entity);
-        return this._http.patch&lt;T&gt;(this.getEntityUri(key), body, this.config.postRequestOptions);
-    }
-
-    public Put(entity: T, key: string): Observable&lt;T&gt; {
-        const body &#x3D; JSON.stringify(entity);
-        return this.handleResponse(this._http.put&lt;T&gt;(this.getEntityUri(key), body, this.config.postRequestOptions));
-    }
-
-    public Delete(key: string): Observable&lt;HttpResponse&lt;T&gt;&gt; {
-        return this._http.delete&lt;T&gt;(this.getEntityUri(key), this.config.defaultRequestOptions);
-    }
-
     public Query(): ODataQuery&lt;T&gt; {
         return new ODataQuery&lt;T&gt;(this.TypeName, this.config, this._http);
     }
 
-    protected getEntityUri(entityKey: string): string {
+    protected getEntityUri(entityKey: string | number | boolean): string {
         return this.config.getEntityUri(entityKey, this._typeName);
     }
 
