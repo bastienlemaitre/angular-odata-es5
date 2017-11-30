@@ -473,28 +473,27 @@
             </section>
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import * as S from &#x27;string&#x27;;
-
-import { HttpHeaders, HttpParams, HttpResponse } from &#x27;@angular/common/http&#x27;;
+        <pre><code class="hljs javascript">import { HttpHeaders, HttpParams, HttpResponse } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 
+import { ODataPagedResult } from &#x27;./angularODataPagedResult&#x27;;
+import { IODataResponseModel } from &#x27;./angularODataResponseModel&#x27;;
 import { ODataUtils } from &#x27;./angularODataUtils&#x27;;
-import { IODataResponseModel, ODataPagedResult } from &#x27;./index&#x27;;
 
 export class KeyConfigs {
-    public filter: string &#x3D; &#x27;$filter&#x27;;
-    public top: string &#x3D; &#x27;$top&#x27;;
-    public skip: string &#x3D; &#x27;$skip&#x27;;
-    public orderBy: string &#x3D; &#x27;$orderby&#x27;;
-    public select: string &#x3D; &#x27;$select&#x27;;
-    public expand: string &#x3D; &#x27;$expand&#x27;;
+    public filter &#x3D; &#x27;$filter&#x27;;
+    public top &#x3D; &#x27;$top&#x27;;
+    public skip &#x3D; &#x27;$skip&#x27;;
+    public orderBy &#x3D; &#x27;$orderby&#x27;;
+    public select &#x3D; &#x27;$select&#x27;;
+    public expand &#x3D; &#x27;$expand&#x27;;
 }
 
 @Injectable()
 export class ODataConfiguration {
     private readonly _postHeaders &#x3D; new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json; charset&#x3D;utf-8&#x27; });
 
-    private _baseUrl: string &#x3D; &#x27;http://localhost/odata&#x27;;
+    private _baseUrl &#x3D; &#x27;http://localhost/odata&#x27;;
 
     public keys: KeyConfigs &#x3D; new KeyConfigs();
     public defaultRequestOptions: {
@@ -516,7 +515,7 @@ export class ODataConfiguration {
     } &#x3D; { headers: this._postHeaders, observe: &#x27;response&#x27; };
 
     set baseUrl(baseUrl: string) {
-        this._baseUrl &#x3D; S(baseUrl).stripRight(&#x27;/&#x27;).s;
+        this._baseUrl &#x3D; baseUrl.replace(/\/+$/, &#x27;&#x27;);
     }
 
     get baseUrl(): string {
@@ -540,7 +539,7 @@ export class ODataConfiguration {
             throw new Error(&#x27;Bad response status: &#x27; + res.status);
         }
 
-        return res.body.value;
+        return (res &amp;&amp; res.body &amp;&amp; res.body.value) as T[];
     }
 
     public extractQueryResultDataWithCount&lt;T&gt;(res: HttpResponse&lt;IODataResponseModel&lt;T&gt;&gt;): ODataPagedResult&lt;T&gt; {
@@ -567,7 +566,7 @@ export class ODataConfiguration {
     }
 
     private sanitizeTypeName(typeName: string): string {
-        return S(typeName).stripLeft(&#x27;/&#x27;).stripRight(&#x27;/&#x27;).s;
+        return typeName.replace(/\/+$/, &#x27;&#x27;).replace(/^\/+/, &#x27;&#x27;);
     }
 }
 </code></pre>

@@ -435,7 +435,7 @@
             return value;
         }
 
-        const escaped &#x3D; value.replace(&#x27;\&#x27;&#x27;, &#x27;\&#x27;\&#x27;&#x27;);
+        const escaped &#x3D; value.replace(/&#x27;/g, &#x27;\&#x27;\&#x27;&#x27;);
         return &#x60;&#x27;${escaped}&#x27;&#x60;;
     }
 }

@@ -558,7 +558,8 @@
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import { Observable } from &#x27;rxjs/Rx&#x27;;
+        <pre><code class="hljs javascript">import &#x27;rxjs/add/operator/map&#x27;;
+import { Observable } from &#x27;rxjs/Observable&#x27;;
 
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from &#x27;@angular/common/http&#x27;;
 import { ODataConfiguration } from &#x27;./angularODataConfiguration&#x27;;
@@ -617,7 +618,7 @@ export abstract class ODataOperation&lt;T&gt; {
         return options;
     }
 
-    protected abstract Exec(...args): Observable&lt;any&gt;;
+    protected abstract Exec(...args: any[]): Observable&lt;any&gt;;
 
     protected parseStringOrStringArray(input: string | string[]): string {
         if (input instanceof Array) {
@@ -645,7 +646,7 @@ export abstract class OperationWithKey&lt;T&gt; extends ODataOperation&lt;T&gt; 
         protected entityKey: string | number | boolean) {
         super(_typeName, config, http);
     }
-    protected abstract Exec(...args): Observable&lt;any&gt;;
+    protected abstract Exec(...args: any[]): Observable&lt;any&gt;;
 }
 
 export abstract class OperationWithEntity&lt;T&gt; extends ODataOperation&lt;T&gt; {
@@ -655,7 +656,7 @@ export abstract class OperationWithEntity&lt;T&gt; extends ODataOperation&lt;T&g
         protected entity: T) {
         super(_typeName, config, http);
     }
-    protected abstract Exec(...args): Observable&lt;any&gt;;
+    protected abstract Exec(...args: any[]): Observable&lt;any&gt;;
 }
 
 export abstract class OperationWithKeyAndEntity&lt;T&gt; extends ODataOperation&lt;T&gt; {
@@ -666,7 +667,7 @@ export abstract class OperationWithKeyAndEntity&lt;T&gt; extends ODataOperation&
         protected entity: T) {
         super(_typeName, config, http);
     }
-    protected abstract Exec(...args): Observable&lt;any&gt;;
+    protected abstract Exec(...args: any[]): Observable&lt;any&gt;;
 }
 
 export class GetOperation&lt;T&gt; extends OperationWithKey&lt;T&gt; {

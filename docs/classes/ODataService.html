@@ -657,13 +657,16 @@
             </section>
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import { Observable } from &#x27;rxjs/Rx&#x27;;
+        <pre><code class="hljs javascript">import &#x27;rxjs/add/operator/catch&#x27;;
+import &#x27;rxjs/add/operator/map&#x27;;
+import { Observable } from &#x27;rxjs/Observable&#x27;;
 
 import { HttpClient, HttpResponse } from &#x27;@angular/common/http&#x27;;
 
+import { ODataConfiguration } from &#x27;./angularODataConfiguration&#x27;;
 import { GetOperation } from &#x27;./angularODataOperation&#x27;;
+import { ODataQuery } from &#x27;./angularODataQuery&#x27;;
 import { ODataUtils } from &#x27;./angularODataUtils&#x27;;
-import { ODataConfiguration, ODataQuery } from &#x27;./index&#x27;;
 
 export class ODataService&lt;T&gt; {
     private _entitiesUri: string;
