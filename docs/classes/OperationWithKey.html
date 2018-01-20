@@ -530,7 +530,7 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b><span class="modifier">Protected</span> parseStringOrStringArray</b>
+                                    <b><span class="modifier">Protected</span> toStringArray</b>
                                 </td>
                             </tr>
             
@@ -539,7 +539,34 @@
                                         <span class="modifier-icon method fa fa-play lock">
                                             <span class="fa fa-lock"></span>
                                         </span>
-                                    <code>parseStringOrStringArray(input: string | string[])</code>
+                                    <code>toStringArray(input: string | string[] | IEnumerable<string> | IQueryable<string>)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>string[]</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Protected</span> toCommaString</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play lock">
+                                            <span class="fa fa-lock"></span>
+                                        </span>
+                                    <code>toCommaString(input: string | string[] | IEnumerable<string> | IQueryable<string>)</code>
                                 </td>
                             </tr>
             
@@ -558,38 +585,75 @@
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import &#x27;rxjs/add/operator/map&#x27;;
+        <pre><code class="hljs javascript">import { Dictionary, IEnumerable, IQueryable, List } from &#x27;linq-collections&#x27;;
+import &#x27;rxjs/add/operator/map&#x27;;
 import { Observable } from &#x27;rxjs/Observable&#x27;;
 
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from &#x27;@angular/common/http&#x27;;
 import { ODataConfiguration } from &#x27;./angularODataConfiguration&#x27;;
 
 export abstract class ODataOperation&lt;T&gt; {
-    private _expand: string;
-    private _select: string;
+    private _expand: string[] &#x3D; [];
+    private _select: string[] &#x3D; [];
 
     constructor(protected typeName: string, protected config: ODataConfiguration, protected http: HttpClient) {
     }
 
     public Expand(expand: string | string[]) {
-        this._expand &#x3D; this.parseStringOrStringArray(expand);
+        if (expand) {
+            this._expand &#x3D; this.toStringArray(expand);
+        }
         return this;
     }
 
     public Select(select: string | string[]) {
-        this._select &#x3D; this.parseStringOrStringArray(select);
+        if (select) {
+            this._select &#x3D; this.toStringArray(select);
+        }
         return this;
     }
 
     protected getParams(): HttpParams {
+        const expandData &#x3D; new Dictionary&lt;string, List&lt;string&gt;&gt;();
+        const normalSelects &#x3D; new List&lt;string&gt;();
+
+        this._expand.forEach((name) &#x3D;&gt; expandData.set(name, new List&lt;string&gt;()));
+
+        this._select.forEach((select: string) &#x3D;&gt; {
+            const items &#x3D; select.split(&#x27;.&#x27;);
+
+            // Expand contains string like: &#x60;Boss.Name&#x60;
+            if (items.length &gt; 1) {
+                const expandName &#x3D; items[0];
+                const propertyName &#x3D; items[1];
+
+                if (!expandData.containsKey(expandName)) {
+                    expandData.set(expandName, new List&lt;string&gt;());
+                }
+
+                expandData.get(expandName).push(propertyName);
+            }
+            else {
+                // Expand is just a simple string like: &#x60;Boss&#x60;
+                normalSelects.push(select);
+            }
+        });
+
         let params &#x3D; new HttpParams();
 
-        if (this._select &amp;&amp; this._select.length &gt; 0) {
-            params &#x3D; params.append(this.config.keys.select, this._select);
+        const expands &#x3D; expandData.distinct().select((element) &#x3D;&gt; {
+            if (element.value.any()) {
+                return &#x60;${element.key}(${this.config.keys.select}&#x3D;${this.toCommaString(element.value)})&#x60;;
+            }
+
+            return element.key;
+        });
+        if (expands.any()) {
+            params &#x3D; params.append(this.config.keys.expand, this.toCommaString(expands.toArray()));
         }
 
-        if (this._expand &amp;&amp; this._expand.length &gt; 0) {
-            params &#x3D; params.append(this.config.keys.expand, this._expand);
+        if (normalSelects.any()) {
+            params &#x3D; params.append(this.config.keys.select, this.toCommaString(normalSelects));
         }
 
         return params;
@@ -620,12 +684,36 @@ export abstract class ODataOperation&lt;T&gt; {
 
     protected abstract Exec(...args: any[]): Observable&lt;any&gt;;
 
-    protected parseStringOrStringArray(input: string | string[]): string {
-        if (input instanceof Array) {
-            return input.join(&#x27;,&#x27;);
+    protected toStringArray(input: string | string[] | IEnumerable&lt;string&gt; | IQueryable&lt;string&gt;): string[] {
+        if (!input) {
+            return [];
         }
 
-        return input as string;
+        if (input instanceof String || typeof input &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+            return input.split(&#x27;,&#x27;).map(s &#x3D;&gt; s.trim());
+        }
+
+        if (input instanceof Array) {
+            return input;
+        }
+
+        return input.toArray();
+    }
+
+    protected toCommaString(input: string | string[] | IEnumerable&lt;string&gt; | IQueryable&lt;string&gt;): string {
+        function replaceDot(value: string): string {
+            return value.replace(&#x27;.&#x27;, &#x27;/&#x27;);
+        }
+
+        if (input instanceof String || typeof input &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+            return replaceDot(input);
+        }
+
+        if (input instanceof Array) {
+            return input.map(s &#x3D;&gt; replaceDot(s)).join(&#x27;,&#x27;);
+        }
+
+        return input.toArray().map(s &#x3D;&gt; replaceDot(s)).join(&#x27;,&#x27;);
     }
 
     private extractData(res: HttpResponse&lt;T&gt;): T {
