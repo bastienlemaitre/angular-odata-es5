@@ -1,6 +1,6 @@
 {
   "name": "angular-odata-es5",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "OData service for Angular (es5 version)",
   "main": "./bundles/angular-odata-es5.umd.js",
   "module": "./index.js",
@@ -119,5 +119,8 @@
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "linq-collections": "^1.0.249"
   }
 }
